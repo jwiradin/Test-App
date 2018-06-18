@@ -7,7 +7,7 @@ import Schedule from "./containers/Schedule";
 import Roster from "./containers/Roster";
 import Home from "./containers/Home";
 
-
+import PlayerService from "./services/PlayerService";
 
 
 
