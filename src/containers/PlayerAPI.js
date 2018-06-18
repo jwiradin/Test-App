@@ -17,7 +17,7 @@ var PlayerAPI = {
         return this.players.find(isPlayer)
     },
     update: function (player) {
-        console.log(player.number);
+
         let p = this.get(player.number);
 
         if (p) {

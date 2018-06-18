@@ -11,7 +11,6 @@ export default class Player extends React.Component {
         this.state = {player: props.player};
         this.clickHandler = this.clickHandler.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        console.log(props);
     };
 
     componentDidMount() {
@@ -19,20 +18,13 @@ export default class Player extends React.Component {
     }
 
     clickHandler = () => {
-        console.log(this.state.player);
-        console.log(this.props);
         this.props.handleUpdate(this.state.player);
     }
 
     handleChange(e) {
-        console.log(this.state.player);
-        console.log(e);
-        console.log(e.target);
-        let cur = Object.assign({}, this.state.player);
-        cur[e.target.name] = e.target.Value;
-
-        this.setState({ player: cur });
-        console.log(this.state.player);
+        let player = Object.assign({}, this.state.player);
+        player[e.target.name] = e.target.value;
+        this.setState({player});
     }
 
     render() {
@@ -79,7 +71,7 @@ export default class Player extends React.Component {
                 <Col sm={2}></Col>
             </FormGroup>
             <ButtonToolbar>
-                <Button href="/roster" bsClass="btn btn-default pull-right">Return</Button>
+                <Button onClick={this.props.goHome} bsClass="btn btn-default pull-right">Return</Button>
                 <Button onClick={this.clickHandler} bsClass="btn btn-default pull-right">Update</Button>
             </ButtonToolbar>
         </Form>

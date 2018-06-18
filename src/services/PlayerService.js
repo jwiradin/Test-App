@@ -8,7 +8,7 @@ export class DisplayPlayers extends Component {
     }
 
     render(){
-        let players =  PlayerAPI.all();
+        let players = PlayerAPI.all();
         return (<Players players={players} />);
     }
 
@@ -16,19 +16,23 @@ export class DisplayPlayers extends Component {
 
 export class DisplayPlayer extends Component {
     constructor(props) {
-        console.log(props);
         super(props);
         this.hanledUpdate = this.hanledUpdate.bind(this);
+        this.goHome = this.goHome.bind(this);
     }
 
     hanledUpdate = (player) => {
-        console.log(player);
         PlayerAPI.update(player);
+        this.goHome();
     };
+
+    goHome = ()=>{
+        this.props.history.push('/roster')
+    }
 
     render(){
         let player = PlayerAPI.get(parseInt(this.props.match.params.number, 10));
-        return (<Player player={player} handleUpdate={this.hanledUpdate} />);
+        return (<Player player={player} handleUpdate={this.hanledUpdate} goHome={this.goHome} />);
     }
 
 };
