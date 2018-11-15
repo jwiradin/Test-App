@@ -4,12 +4,12 @@
 
 var PlayerAPI = {
     players: [
-        { number: 1, name: "Ben Blocker", position: "G" },
-        { number: 2, name: "Dave Defender", position: "D" },
-        { number: 3, name: "Sam Sweeper", position: "D" },
-        { number: 4, name: "Matt Midfielder", position: "M" },
-        { number: 5, name: "William Winger", position: "M" },
-        { number: 6, name: "Fillipe Forward", position: "F" }
+        { number: 1, name: "Ben Blocker", position: "G", joinDate: "2015-01-23" },
+        { number: 2, name: "Dave Defender", position: "D", joinDate: "2013-04-13" },
+        { number: 3, name: "Sam Sweeper", position: "D", joinDate: "2014-11-04" },
+        { number: 4, name: "Matt Midfielder", position: "M", joinDate: "2015-04-03" },
+        { number: 5, name: "William Winger", position: "M", joinDate: "2015-09-24" },
+        { number: 6, name: "Fillipe Forward", position: "F", joinDate: "2014-08-15" }
     ],
     all: function () { return this.players },
     get: function (id) {
@@ -32,7 +32,8 @@ var PlayerAPI = {
             p = {
                 number: player.number,
                 name: player.name,
-                position: player.position
+                position: player.position,
+                joinDate: player.joinDate
             };
             this.players.add(p);
         }

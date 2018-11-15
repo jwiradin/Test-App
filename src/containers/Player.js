@@ -1,9 +1,21 @@
 import React from 'react';
-import { ButtonToolbar, Nav, Navbar, NavItem, ListGroup, ListGroupItem, Col, Table, Form, FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap';
+import { ButtonToolbar, Nav, NavItem,  Col, Form, FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import ReactJoiValidations from 'react-joi-validation';
+import Joi from 'joi-browser';
+
+
 // The Player looks up the player using the number parsed from
 // the URL's pathname. If no player is found with the given
 // number, then a "player not found" message is displayed.
+
+var schema = Joi.object().keys({
+    name : Joi.string().required(),
+    position : Joi.string().required(),
+    joinDate : Joi.date().required()
+});
+
+ReactJoiValidations.setJoi(Joi);
 
 export default class Player extends React.Component {
     constructor(props) {
@@ -13,21 +25,23 @@ export default class Player extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     };
 
+    
     componentDidMount() {
         //this.setState( {player: this.props.getPlayer()});
-    }
+    };
 
     clickHandler = () => {
         this.props.handleUpdate(this.state.player);
-    }
+    };
 
     handleChange(e) {
         let player = Object.assign({}, this.state.player);
         player[e.target.name] = e.target.value;
         this.setState({player});
-    }
-
+    };
+    
     render() {
+
         if (!this.state.player) {
             return <div>Sorry, but the player was not found</div>
         }
@@ -70,6 +84,18 @@ export default class Player extends React.Component {
                 </Col>
                 <Col sm={2}></Col>
             </FormGroup>
+            <FormGroup controlId="joinDate">
+                <Col componentClass={ControlLabel} sm={2}>Join Date</Col>
+                <Col sm={8}>
+                    <FormControl
+                        name="joinDate"
+                        type="date"
+                        value={this.state.player.joinDate}
+                        onChange={this.handleChange}
+                    />
+                </Col>
+                <Col sm={2}></Col>
+            </FormGroup>
             <ButtonToolbar>
                 <Button onClick={this.props.goHome} bsClass="btn btn-default pull-right">Return</Button>
                 <Button onClick={this.clickHandler} bsClass="btn btn-default pull-right">Update</Button>
@@ -78,6 +104,11 @@ export default class Player extends React.Component {
         )
     };
 }
+var validationOptions = {
+    joiSchema : schema
+};
+
+ReactJoiValidations(Player, {only: ['name', 'position', 'joinDate']}, validationOptions);
 
 // The FullRoster iterates over all of the players and creates
 // a link to their profile page.

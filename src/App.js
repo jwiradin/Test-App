@@ -6,6 +6,8 @@ import { Nav, Navbar, NavItem,Grid } from 'react-bootstrap';
 import Schedule from "./containers/Schedule";
 import Roster from "./containers/Roster";
 import Home from "./containers/Home";
+import Search from "./containers/Search";
+import AutoSelect from "./containers/AutoSelect";
 
 import PlayerService from "./services/PlayerService";
 
@@ -23,6 +25,7 @@ const Main = () => (
       <Route exact path='/' component={Home} />
       <Route path='/roster' component={Roster} />
       <Route path='/schedule' component={Schedule} />
+      <Route path='/search' component={AutoSelect} />
     </Switch>
   </main>
 )
@@ -35,6 +38,7 @@ const Header = () => (
       <NavItem eventKey={1}><Link to='/'>Home</Link></NavItem>
       <NavItem eventKey={2}><Link to='/roster'>Roster</Link></NavItem>
       <NavItem eventKey={3}><Link to='/schedule'>Schedule</Link></NavItem>
+      <NavItem eventKey={4}><Link to='/search'>Search</Link></NavItem>
     </Nav>
   </Navbar>
 )

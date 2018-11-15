@@ -22,7 +22,7 @@ export class DisplayPlayer extends Component {
     }
 
     hanledUpdate = (player) => {
-        PlayerAPI.update(player);
+        PlayerAPI.update(player); 
         this.goHome();
     };
 
